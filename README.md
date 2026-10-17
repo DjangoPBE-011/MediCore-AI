@@ -1,0 +1,2 @@
+# MediCore-AI
+medic ai
