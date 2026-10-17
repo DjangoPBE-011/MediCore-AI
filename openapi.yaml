@@ -1,0 +1,5597 @@
+openapi: 3.0.3
+info:
+  title: MediCore API
+  version: 1.0.0
+  description: Oilaviy poliklinikalar uchun elektron tibbiy ma'lumotnoma tizimi
+paths:
+  /api/appointments/:
+    get:
+      operationId: appointments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - appointments
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAppointmentList'
+          description: ''
+    post:
+      operationId: appointments_create
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/:
+    get:
+      operationId: appointments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/cancel/:
+    post:
+      operationId: appointments_cancel_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/confirm/:
+    post:
+      operationId: appointments_confirm_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/finish/:
+    post:
+      operationId: appointments_finish_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/no_show/:
+    post:
+      operationId: appointments_no_show_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/appointments/{id}/start/:
+    post:
+      operationId: appointments_start_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: ''
+  /api/assistant/draft-note/:
+    post:
+      operationId: assistant_draft_note_create
+      description: 'Shifokor uchun: matndan yozuv qoralamasi va ICD-10 TAKLIFLARI.
+        Yakuniy tashxisni shifokor tanlaydi.'
+      tags:
+      - assistant
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/assistant/drug-check/:
+    post:
+      operationId: assistant_drug_check_create
+      tags:
+      - assistant
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/assistant/explain-lab/:
+    post:
+      operationId: assistant_explain_lab_create
+      tags:
+      - assistant
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/assistant/triage/:
+    post:
+      operationId: assistant_triage_create
+      tags:
+      - assistant
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/audit/:
+    get:
+      operationId: audit_list
+      description: 'Faqat o''qish: admin jurnalni o''zgartira olmaydi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - audit
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAuditList'
+          description: ''
+  /api/audit/{id}/:
+    get:
+      operationId: audit_retrieve
+      description: 'Faqat o''qish: admin jurnalni o''zgartira olmaydi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this audit log.
+        required: true
+      tags:
+      - audit
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+          description: ''
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /api/auth/me/:
+    get:
+      operationId: auth_me_retrieve
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+          description: ''
+    put:
+      operationId: auth_me_update
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Me'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Me'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Me'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+          description: ''
+    patch:
+      operationId: auth_me_partial_update
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMe'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMe'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMe'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+          description: ''
+  /api/auth/password/:
+    post:
+      operationId: auth_password_create
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/auth/users/:
+    get:
+      operationId: auth_users_list
+      description: 'Admin: foydalanuvchilar. O''chirish yo''q, faqat faolsizlantirish.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserAdminList'
+          description: ''
+    post:
+      operationId: auth_users_create
+      description: 'Admin: foydalanuvchilar. O''chirish yo''q, faqat faolsizlantirish.'
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserAdmin'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAdmin'
+          description: ''
+  /api/auth/users/{id}/:
+    get:
+      operationId: auth_users_retrieve
+      description: 'Admin: foydalanuvchilar. O''chirish yo''q, faqat faolsizlantirish.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this foydalanuvchi.
+        required: true
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAdmin'
+          description: ''
+    patch:
+      operationId: auth_users_partial_update
+      description: 'Admin: foydalanuvchilar. O''chirish yo''q, faqat faolsizlantirish.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this foydalanuvchi.
+        required: true
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAdmin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAdmin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAdmin'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAdmin'
+          description: ''
+  /api/broadcast/:
+    post:
+      operationId: broadcast_create
+      description: 'Admin: ommaviy xabar.'
+      tags:
+      - broadcast
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/certificates/:
+    get:
+      operationId: certificates_list
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - certificates
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCertificateList'
+          description: ''
+    post:
+      operationId: certificates_create
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/certificates/{id}/:
+    get:
+      operationId: certificates_retrieve
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+    put:
+      operationId: certificates_update
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+    patch:
+      operationId: certificates_partial_update
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificate'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+    delete:
+      operationId: certificates_destroy
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/certificates/{id}/approve/:
+    post:
+      operationId: certificates_approve_create
+      description: 'ERI bilan tasdiqlash: imzo seriya raqami majburiy. Oddiy tugma
+        ERI emas.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/certificates/{id}/cancel/:
+    post:
+      operationId: certificates_cancel_create
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/certificates/{id}/pdf/:
+    get:
+      operationId: certificates_pdf_retrieve
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/certificates/{id}/reject/:
+    post:
+      operationId: certificates_reject_create
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/certificates/{id}/submit/:
+    post:
+      operationId: certificates_submit_create
+      description: |-
+        Doktor: yaratadi / tahrirlaydi (faqat qoralama) / tasdiqlashga yuboradi / tasdiqlaydi (ERI) / rad etadi.
+        Bemor: faqat o'zining TASDIQLANGAN hujjatlarini ko'radi va PDF yuklaydi.
+        Admin: faqat o'qiydi, tahrirlay olmaydi va shifokor nomidan tasdiqlay olmaydi.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - certificates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Certificate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: ''
+  /api/device-token/:
+    post:
+      operationId: device_token_create
+      tags:
+      - device-token
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/devices/:
+    get:
+      operationId: devices_list
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - devices
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDeviceList'
+          description: ''
+    post:
+      operationId: devices_create
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      tags:
+      - devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Device'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+  /api/devices/{id}/:
+    get:
+      operationId: devices_retrieve
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health device.
+        required: true
+      tags:
+      - devices
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+    patch:
+      operationId: devices_partial_update
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health device.
+        required: true
+      tags:
+      - devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDevice'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+          description: ''
+  /api/doctors/:
+    get:
+      operationId: doctors_list
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - doctors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDoctorList'
+          description: ''
+    post:
+      operationId: doctors_create
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      tags:
+      - doctors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DoctorCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DoctorCreate'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoctorCreate'
+          description: ''
+  /api/doctors/{id}/:
+    get:
+      operationId: doctors_retrieve
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - doctors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+    patch:
+      operationId: doctors_partial_update
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - doctors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDoctor'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+  /api/doctors/{id}/schedule/:
+    get:
+      operationId: doctors_schedule_retrieve
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - doctors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+  /api/doctors/{id}/slots/:
+    get:
+      operationId: doctors_slots_retrieve
+      description: 'O''chirish yo''q: shifokor faqat faolsizlantiriladi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - doctors
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+          description: ''
+  /api/family/:
+    get:
+      operationId: family_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - family
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFamilyList'
+          description: ''
+    post:
+      operationId: family_create
+      tags:
+      - family
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Family'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Family'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Family'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+          description: ''
+  /api/family/{id}/:
+    get:
+      operationId: family_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - family
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+          description: ''
+    put:
+      operationId: family_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - family
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Family'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Family'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Family'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+          description: ''
+    patch:
+      operationId: family_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - family
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFamily'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFamily'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFamily'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Family'
+          description: ''
+    delete:
+      operationId: family_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - family
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/icd10/:
+    get:
+      operationId: icd10_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - icd10
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedICDList'
+          description: ''
+    post:
+      operationId: icd10_create
+      tags:
+      - icd10
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ICD'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ICD'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ICD'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICD'
+          description: ''
+  /api/icd10/{id}/:
+    get:
+      operationId: icd10_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - icd10
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICD'
+          description: ''
+    patch:
+      operationId: icd10_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - icd10
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedICD'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedICD'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedICD'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICD'
+          description: ''
+  /api/lab-orders/:
+    get:
+      operationId: lab_orders_list
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - lab-orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabOrderList'
+          description: ''
+    post:
+      operationId: lab_orders_create
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      tags:
+      - lab-orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LabOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LabOrder'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+          description: ''
+  /api/lab-orders/{id}/:
+    get:
+      operationId: lab_orders_retrieve
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this lab order.
+        required: true
+      tags:
+      - lab-orders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabOrder'
+          description: ''
+  /api/lab-results/:
+    get:
+      operationId: lab_results_list
+      description: 'Bemorga tegishli yozuvlar: bemor o''zinikini ko''radi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - lab-results
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLabResultList'
+          description: ''
+    post:
+      operationId: lab_results_create
+      description: 'Bemorga tegishli yozuvlar: bemor o''zinikini ko''radi.'
+      tags:
+      - lab-results
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabResult'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LabResult'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LabResult'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabResult'
+          description: ''
+  /api/medicines/:
+    get:
+      operationId: medicines_list
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - medicines
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMedicineList'
+          description: ''
+    post:
+      operationId: medicines_create
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      tags:
+      - medicines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Medicine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Medicine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Medicine'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medicine'
+          description: ''
+  /api/medicines/{id}/:
+    get:
+      operationId: medicines_retrieve
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medicine.
+        required: true
+      tags:
+      - medicines
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medicine'
+          description: ''
+    patch:
+      operationId: medicines_partial_update
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medicine.
+        required: true
+      tags:
+      - medicines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicine'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMedicine'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medicine'
+          description: ''
+  /api/metrics/:
+    get:
+      operationId: metrics_list
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - metrics
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMetricList'
+          description: ''
+    post:
+      operationId: metrics_create
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      tags:
+      - metrics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Metric'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Metric'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Metric'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+          description: ''
+  /api/metrics/{id}/:
+    get:
+      operationId: metrics_retrieve
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health metric.
+        required: true
+      tags:
+      - metrics
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+          description: ''
+    put:
+      operationId: metrics_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health metric.
+        required: true
+      tags:
+      - metrics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Metric'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Metric'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Metric'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+          description: ''
+    patch:
+      operationId: metrics_partial_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health metric.
+        required: true
+      tags:
+      - metrics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMetric'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMetric'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMetric'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metric'
+          description: ''
+    delete:
+      operationId: metrics_destroy
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this health metric.
+        required: true
+      tags:
+      - metrics
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/notifications/:
+    get:
+      operationId: notifications_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - notifications
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedNList'
+          description: ''
+  /api/notifications/{id}/:
+    patch:
+      operationId: notifications_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedN'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedN'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedN'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/N'
+          description: ''
+  /api/notifications/read_all/:
+    post:
+      operationId: notifications_read_all_create
+      tags:
+      - notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/N'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/N'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/N'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/N'
+          description: ''
+  /api/patients/:
+    get:
+      operationId: patients_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - patients
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPatientList'
+          description: ''
+    post:
+      operationId: patients_create
+      tags:
+      - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Patient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /api/patients/{id}/:
+    get:
+      operationId: patients_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - patients
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+    patch:
+      operationId: patients_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /api/patients/me/:
+    get:
+      operationId: patients_me_retrieve
+      tags:
+      - patients
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+    patch:
+      operationId: patients_me_partial_update
+      tags:
+      - patients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPatient'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+          description: ''
+  /api/places/:
+    get:
+      operationId: places_list
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - places
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlaceList'
+          description: ''
+    post:
+      operationId: places_create
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      tags:
+      - places
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Place'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Place'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Place'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+          description: ''
+  /api/places/{id}/:
+    get:
+      operationId: places_retrieve
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this place.
+        required: true
+      tags:
+      - places
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+          description: ''
+    patch:
+      operationId: places_partial_update
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this place.
+        required: true
+      tags:
+      - places
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPlace'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPlace'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPlace'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+          description: ''
+  /api/polyclinics/:
+    get:
+      operationId: polyclinics_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - polyclinics
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPolyclinicList'
+          description: ''
+    post:
+      operationId: polyclinics_create
+      tags:
+      - polyclinics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Polyclinic'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Polyclinic'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Polyclinic'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polyclinic'
+          description: ''
+  /api/polyclinics/{id}/:
+    get:
+      operationId: polyclinics_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this polyclinic.
+        required: true
+      tags:
+      - polyclinics
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polyclinic'
+          description: ''
+    patch:
+      operationId: polyclinics_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this polyclinic.
+        required: true
+      tags:
+      - polyclinics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPolyclinic'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPolyclinic'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPolyclinic'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Polyclinic'
+          description: ''
+  /api/prescriptions/:
+    get:
+      operationId: prescriptions_list
+      description: 'Bemorga tegishli yozuvlar: bemor o''zinikini ko''radi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - prescriptions
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPrescriptionList'
+          description: ''
+    post:
+      operationId: prescriptions_create
+      description: 'Bemorga tegishli yozuvlar: bemor o''zinikini ko''radi.'
+      tags:
+      - prescriptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Prescription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Prescription'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Prescription'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prescription'
+          description: ''
+  /api/prescriptions/{id}/:
+    get:
+      operationId: prescriptions_retrieve
+      description: 'Bemorga tegishli yozuvlar: bemor o''zinikini ko''radi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - prescriptions
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prescription'
+          description: ''
+  /api/queue/{id}/cancel/:
+    post:
+      operationId: queue_cancel_create
+      description: Onlayn navbat.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - queue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/queue/board/:
+    get:
+      operationId: queue_board_retrieve
+      description: Onlayn navbat.
+      tags:
+      - queue
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/queue/call_next/:
+    post:
+      operationId: queue_call_next_create
+      description: Onlayn navbat.
+      tags:
+      - queue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/queue/doctors/:
+    get:
+      operationId: queue_doctors_retrieve
+      description: 'Bemor uchun: shifokorlar va ularning bugungi navbat uzunligi.'
+      tags:
+      - queue
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/queue/my/:
+    get:
+      operationId: queue_my_retrieve
+      description: Onlayn navbat.
+      tags:
+      - queue
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/queue/take/:
+    post:
+      operationId: queue_take_create
+      description: Onlayn navbat.
+      tags:
+      - queue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+          description: ''
+  /api/records/:
+    get:
+      operationId: records_list
+      description: 'Ko''rik natijalari: shifokor yozadi, bemor faqat o''qiydi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - records
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRecordList'
+          description: ''
+    post:
+      operationId: records_create
+      description: 'Ko''rik natijalari: shifokor yozadi, bemor faqat o''qiydi.'
+      tags:
+      - records
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Record'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Record'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: ''
+  /api/records/{id}/:
+    get:
+      operationId: records_retrieve
+      description: 'Ko''rik natijalari: shifokor yozadi, bemor faqat o''qiydi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - records
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: ''
+  /api/reminders/:
+    get:
+      operationId: reminders_list
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - reminders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReminderList'
+          description: ''
+    post:
+      operationId: reminders_create
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      tags:
+      - reminders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+          description: ''
+  /api/reminders/{id}/:
+    get:
+      operationId: reminders_retrieve
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medication reminder.
+        required: true
+      tags:
+      - reminders
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+          description: ''
+    put:
+      operationId: reminders_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medication reminder.
+        required: true
+      tags:
+      - reminders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+          description: ''
+    patch:
+      operationId: reminders_partial_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medication reminder.
+        required: true
+      tags:
+      - reminders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReminder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReminder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReminder'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+          description: ''
+    delete:
+      operationId: reminders_destroy
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medication reminder.
+        required: true
+      tags:
+      - reminders
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/reminders/{id}/take/:
+    post:
+      operationId: reminders_take_create
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this medication reminder.
+        required: true
+      tags:
+      - reminders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reminder'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reminder'
+          description: ''
+  /api/reviews/:
+    get:
+      operationId: reviews_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - reviews
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReviewList'
+          description: ''
+    post:
+      operationId: reviews_create
+      tags:
+      - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+  /api/reviews/{id}/:
+    get:
+      operationId: reviews_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this review.
+        required: true
+      tags:
+      - reviews
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+  /api/sanatoriums/:
+    get:
+      operationId: sanatoriums_list
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - sanatoriums
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSanatoriumList'
+          description: ''
+    post:
+      operationId: sanatoriums_create
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      tags:
+      - sanatoriums
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sanatorium'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sanatorium'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sanatorium'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sanatorium'
+          description: ''
+  /api/sanatoriums/{id}/:
+    get:
+      operationId: sanatoriums_retrieve
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sanatorium.
+        required: true
+      tags:
+      - sanatoriums
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sanatorium'
+          description: ''
+    patch:
+      operationId: sanatoriums_partial_update
+      description: Hamma o'qiy oladi, faqat admin boshqaradi (o'chirish o'rniga is_active=False).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sanatorium.
+        required: true
+      tags:
+      - sanatoriums
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSanatorium'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSanatorium'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSanatorium'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sanatorium'
+          description: ''
+  /api/shared/{token}/:
+    get:
+      operationId: shared_retrieve
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      tags:
+      - shared
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/shares/:
+    get:
+      operationId: shares_list
+      description: 'Bemor: ma''lumotnomani tanlab, vaqt bilan cheklab ulashadi.'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - shares
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedShareList'
+          description: ''
+    post:
+      operationId: shares_create
+      description: 'Bemor: ma''lumotnomani tanlab, vaqt bilan cheklab ulashadi.'
+      tags:
+      - shares
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Share'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Share'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Share'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Share'
+          description: ''
+  /api/shares/{id}/:
+    delete:
+      operationId: shares_destroy
+      description: 'Bemor: ma''lumotnomani tanlab, vaqt bilan cheklab ulashadi.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - shares
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/specializations/:
+    get:
+      operationId: specializations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - specializations
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSpecializationList'
+          description: ''
+    post:
+      operationId: specializations_create
+      tags:
+      - specializations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Specialization'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+  /api/specializations/{id}/:
+    get:
+      operationId: specializations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - specializations
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+    patch:
+      operationId: specializations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this specialization.
+        required: true
+      tags:
+      - specializations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSpecialization'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specialization'
+          description: ''
+  /api/stats/:
+    get:
+      operationId: stats_retrieve
+      description: Admin dashboard va hisobotlar; shifokor uchun o'z statistikasi.
+      tags:
+      - stats
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/vaccinations/:
+    get:
+      operationId: vaccinations_list
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - vaccinations
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVaccinationList'
+          description: ''
+    post:
+      operationId: vaccinations_create
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      tags:
+      - vaccinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccination'
+          description: ''
+  /api/vaccinations/{id}/:
+    get:
+      operationId: vaccinations_retrieve
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vaccination.
+        required: true
+      tags:
+      - vaccinations
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccination'
+          description: ''
+    put:
+      operationId: vaccinations_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vaccination.
+        required: true
+      tags:
+      - vaccinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vaccination'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccination'
+          description: ''
+    patch:
+      operationId: vaccinations_partial_update
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vaccination.
+        required: true
+      tags:
+      - vaccinations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVaccination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVaccination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVaccination'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccination'
+          description: ''
+    delete:
+      operationId: vaccinations_destroy
+      description: Bemor o'z ma'lumotlarini boshqaradi (kundalik, eslatma, emlash...).
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this vaccination.
+        required: true
+      tags:
+      - vaccinations
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/verify/{token}/:
+    get:
+      operationId: verify_retrieve
+      description: 'Ochiq QR tekshiruv. Faqat minimal ma''lumot: tashxis va tahlil
+        KO''RSATILMAYDI.'
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      tags:
+      - verify
+      security:
+      - {}
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          type: integer
+          readOnly: true
+        patient_name:
+          type: string
+          readOnly: true
+        family_member:
+          type: integer
+          nullable: true
+        doctor:
+          type: integer
+        doctor_name:
+          type: string
+          readOnly: true
+        specialization:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+          format: time
+        status:
+          allOf:
+          - $ref: '#/components/schemas/AppointmentStatusEnum'
+          readOnly: true
+          default: pending
+        status_label:
+          type: string
+          readOnly: true
+        reason:
+          type: string
+          maxLength: 200
+        cancel_reason:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - cancel_reason
+      - created_at
+      - date
+      - doctor
+      - doctor_name
+      - id
+      - patient
+      - patient_name
+      - room
+      - specialization
+      - status
+      - status_label
+      - time
+    AppointmentStatusEnum:
+      enum:
+      - pending
+      - confirmed
+      - in_progress
+      - done
+      - cancelled
+      - no_show
+      type: string
+      description: |-
+        * `pending` - Kutilmoqda
+        * `confirmed` - Tasdiqlangan
+        * `in_progress` - Qabul jarayonida
+        * `done` - Yakunlangan
+        * `cancelled` - Bekor qilingan
+        * `no_show` - Kelmagan
+    Audit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+          nullable: true
+        user_name:
+          type: string
+          readOnly: true
+          default: ''
+        role:
+          type: string
+          maxLength: 10
+        action:
+          type: string
+          maxLength: 60
+        object_type:
+          type: string
+          maxLength: 60
+        object_id:
+          type: string
+          maxLength: 40
+        detail: {}
+        ip:
+          type: string
+          nullable: true
+      required:
+      - action
+      - created_at
+      - id
+      - user_name
+    BlankEnum:
+      enum:
+      - ''
+    BloodGroupEnum:
+      enum:
+      - O+
+      - O-
+      - A+
+      - A-
+      - B+
+      - B-
+      - AB+
+      - AB-
+      type: string
+      description: |-
+        * `O+` - O (I) +
+        * `O-` - O (I) −
+        * `A+` - A (II) +
+        * `A-` - A (II) −
+        * `B+` - B (III) +
+        * `B-` - B (III) −
+        * `AB+` - AB (IV) +
+        * `AB-` - AB (IV) −
+    Certificate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        patient:
+          type: integer
+        patient_name:
+          type: string
+          readOnly: true
+        doctor:
+          type: integer
+          readOnly: true
+        doctor_name:
+          type: string
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/CertificateKindEnum'
+        conclusion:
+          type: string
+        diagnosis:
+          type: integer
+          nullable: true
+        diagnosis_text:
+          type: string
+          readOnly: true
+          default: ''
+        valid_until:
+          type: string
+          format: date
+          nullable: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/CertificateStatusEnum'
+          readOnly: true
+        effective_status:
+          type: string
+          readOnly: true
+        status_label:
+          type: string
+          readOnly: true
+        reject_reason:
+          type: string
+          readOnly: true
+        cancel_reason:
+          type: string
+          readOnly: true
+        signature_serial:
+          type: string
+          readOnly: true
+        signed_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        qr_token:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - cancel_reason
+      - created_at
+      - diagnosis_text
+      - doctor
+      - doctor_name
+      - effective_status
+      - id
+      - number
+      - patient
+      - patient_name
+      - qr_token
+      - reject_reason
+      - signature_serial
+      - signed_at
+      - status
+      - status_label
+    CertificateKindEnum:
+      enum:
+      - pool
+      - sport
+      - school
+      - work
+      - sick
+      - other
+      type: string
+      description: |-
+        * `pool` - Bassein
+        * `sport` - Sport
+        * `school` - Maktab (086/u)
+        * `work` - Ish joyi
+        * `sick` - Kasallik varaqasi
+        * `other` - Boshqa
+    CertificateStatusEnum:
+      enum:
+      - draft
+      - pending
+      - approved
+      - rejected
+      - cancelled
+      - expired
+      type: string
+      description: |-
+        * `draft` - Qoralama
+        * `pending` - Tasdiqlash kutilmoqda
+        * `approved` - Tasdiqlangan
+        * `rejected` - Rad etilgan
+        * `cancelled` - Bekor qilingan
+        * `expired` - Muddati tugagan
+    Device:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        discount_percent:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        category:
+          type: string
+          maxLength: 40
+        short_info:
+          type: string
+          maxLength: 160
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        old_price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        warranty_months:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        rating:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
+        is_active:
+          type: boolean
+      required:
+      - discount_percent
+      - id
+      - name
+      - price
+    Doctor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        full_name:
+          type: string
+          readOnly: true
+        polyclinic:
+          type: integer
+        polyclinic_name:
+          type: string
+          readOnly: true
+        specialization:
+          type: integer
+        specialization_name:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          maxLength: 20
+        experience_years:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        bio:
+          type: string
+        license_no:
+          type: string
+          maxLength: 40
+        is_active:
+          type: boolean
+        rating:
+          type: string
+          readOnly: true
+        queue_length:
+          type: string
+          readOnly: true
+      required:
+      - full_name
+      - id
+      - polyclinic
+      - polyclinic_name
+      - queue_length
+      - rating
+      - specialization
+      - specialization_name
+      - user
+    DoctorCreate:
+      type: object
+      description: 'Admin shifokor yaratadi: foydalanuvchi + shifokor profili birga.'
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+          minLength: 8
+        first_name:
+          type: string
+        last_name:
+          type: string
+        middle_name:
+          type: string
+        phone:
+          type: string
+        polyclinic:
+          type: integer
+        specialization:
+          type: integer
+        room:
+          type: string
+        experience_years:
+          type: integer
+          default: 0
+      required:
+      - first_name
+      - last_name
+      - password
+      - polyclinic
+      - specialization
+      - username
+    Family:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+          maxLength: 120
+        relation:
+          type: string
+          maxLength: 30
+        birth_date:
+          type: string
+          format: date
+          nullable: true
+        blood_group:
+          type: string
+          maxLength: 4
+        owner:
+          type: integer
+          readOnly: true
+      required:
+      - full_name
+      - id
+      - owner
+      - relation
+    GenderEnum:
+      enum:
+      - m
+      - f
+      type: string
+      description: |-
+        * `m` - Erkak
+        * `f` - Ayol
+    ICD:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 10
+        name:
+          type: string
+          maxLength: 250
+        section:
+          type: string
+          maxLength: 80
+        is_active:
+          type: boolean
+      required:
+      - code
+      - id
+      - name
+    LabOrder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        test:
+          type: string
+          maxLength: 100
+        lab:
+          type: string
+          maxLength: 100
+        price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        scheduled_for:
+          type: string
+          format: date-time
+        status:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        patient:
+          type: integer
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - patient
+      - scheduled_for
+      - status
+      - test
+    LabResult:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        flag:
+          type: string
+          readOnly: true
+        test:
+          type: string
+          maxLength: 100
+        indicator:
+          type: string
+          maxLength: 80
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,2})?$
+        unit:
+          type: string
+          maxLength: 20
+        ref_low:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,2})?$
+          nullable: true
+        ref_high:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,7}(?:\.\d{0,2})?$
+          nullable: true
+        taken_at:
+          type: string
+          format: date
+        patient:
+          type: integer
+      required:
+      - flag
+      - id
+      - indicator
+      - patient
+      - taken_at
+      - test
+      - value
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    Me:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+        phone:
+          type: string
+          maxLength: 20
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        middle_name:
+          type: string
+          maxLength: 60
+        full_name:
+          type: string
+          readOnly: true
+        role:
+          allOf:
+          - $ref: '#/components/schemas/RoleEnum'
+          readOnly: true
+        language:
+          type: string
+          maxLength: 5
+        two_factor:
+          type: boolean
+      required:
+      - full_name
+      - id
+      - role
+      - username
+    Medicine:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        discount_percent:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        short_info:
+          type: string
+          maxLength: 160
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        old_price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        discount_until:
+          type: string
+          format: date
+          nullable: true
+        category:
+          type: string
+          maxLength: 40
+        prescription_only:
+          type: boolean
+        is_active:
+          type: boolean
+      required:
+      - discount_percent
+      - id
+      - name
+      - price
+    Metric:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/MetricKindEnum'
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,5}(?:\.\d{0,2})?$
+        value2:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,5}(?:\.\d{0,2})?$
+          nullable: true
+        measured_at:
+          type: string
+          format: date-time
+        patient:
+          type: integer
+          readOnly: true
+      required:
+      - id
+      - kind
+      - measured_at
+      - patient
+      - status
+      - value
+    MetricKindEnum:
+      enum:
+      - bp
+      - sugar
+      - weight
+      - pulse
+      type: string
+      description: |-
+        * `bp` - Qon bosimi
+        * `sugar` - Qand
+        * `weight` - Vazn
+        * `pulse` - Puls
+    N:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        body:
+          type: string
+          readOnly: true
+        kind:
+          type: string
+          readOnly: true
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - body
+      - created_at
+      - id
+      - kind
+      - title
+    PaginatedAppointmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Appointment'
+    PaginatedAuditList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Audit'
+    PaginatedCertificateList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+    PaginatedDeviceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+    PaginatedDoctorList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Doctor'
+    PaginatedFamilyList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Family'
+    PaginatedICDList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ICD'
+    PaginatedLabOrderList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabOrder'
+    PaginatedLabResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabResult'
+    PaginatedMedicineList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Medicine'
+    PaginatedMetricList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Metric'
+    PaginatedNList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/N'
+    PaginatedPatientList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Patient'
+    PaginatedPlaceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Place'
+    PaginatedPolyclinicList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Polyclinic'
+    PaginatedPrescriptionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prescription'
+    PaginatedRecordList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Record'
+    PaginatedReminderList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reminder'
+    PaginatedReviewList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+    PaginatedSanatoriumList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sanatorium'
+    PaginatedShareList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Share'
+    PaginatedSpecializationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Specialization'
+    PaginatedUserAdminList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAdmin'
+    PaginatedVaccinationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vaccination'
+    PatchedCertificate:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        patient:
+          type: integer
+        patient_name:
+          type: string
+          readOnly: true
+        doctor:
+          type: integer
+          readOnly: true
+        doctor_name:
+          type: string
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/CertificateKindEnum'
+        conclusion:
+          type: string
+        diagnosis:
+          type: integer
+          nullable: true
+        diagnosis_text:
+          type: string
+          readOnly: true
+          default: ''
+        valid_until:
+          type: string
+          format: date
+          nullable: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/CertificateStatusEnum'
+          readOnly: true
+        effective_status:
+          type: string
+          readOnly: true
+        status_label:
+          type: string
+          readOnly: true
+        reject_reason:
+          type: string
+          readOnly: true
+        cancel_reason:
+          type: string
+          readOnly: true
+        signature_serial:
+          type: string
+          readOnly: true
+        signed_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        qr_token:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDevice:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        discount_percent:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        category:
+          type: string
+          maxLength: 40
+        short_info:
+          type: string
+          maxLength: 160
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        old_price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        warranty_months:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        rating:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
+        is_active:
+          type: boolean
+    PatchedDoctor:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        full_name:
+          type: string
+          readOnly: true
+        polyclinic:
+          type: integer
+        polyclinic_name:
+          type: string
+          readOnly: true
+        specialization:
+          type: integer
+        specialization_name:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          maxLength: 20
+        experience_years:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        bio:
+          type: string
+        license_no:
+          type: string
+          maxLength: 40
+        is_active:
+          type: boolean
+        rating:
+          type: string
+          readOnly: true
+        queue_length:
+          type: string
+          readOnly: true
+    PatchedFamily:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+          maxLength: 120
+        relation:
+          type: string
+          maxLength: 30
+        birth_date:
+          type: string
+          format: date
+          nullable: true
+        blood_group:
+          type: string
+          maxLength: 4
+        owner:
+          type: integer
+          readOnly: true
+    PatchedICD:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          maxLength: 10
+        name:
+          type: string
+          maxLength: 250
+        section:
+          type: string
+          maxLength: 80
+        is_active:
+          type: boolean
+    PatchedMe:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+        phone:
+          type: string
+          maxLength: 20
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        middle_name:
+          type: string
+          maxLength: 60
+        full_name:
+          type: string
+          readOnly: true
+        role:
+          allOf:
+          - $ref: '#/components/schemas/RoleEnum'
+          readOnly: true
+        language:
+          type: string
+          maxLength: 5
+        two_factor:
+          type: boolean
+    PatchedMedicine:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        discount_percent:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        short_info:
+          type: string
+          maxLength: 160
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        old_price:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+          nullable: true
+        discount_until:
+          type: string
+          format: date
+          nullable: true
+        category:
+          type: string
+          maxLength: 40
+        prescription_only:
+          type: boolean
+        is_active:
+          type: boolean
+    PatchedMetric:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/MetricKindEnum'
+        value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,5}(?:\.\d{0,2})?$
+        value2:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,5}(?:\.\d{0,2})?$
+          nullable: true
+        measured_at:
+          type: string
+          format: date-time
+        patient:
+          type: integer
+          readOnly: true
+    PatchedN:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          readOnly: true
+        body:
+          type: string
+          readOnly: true
+        kind:
+          type: string
+          readOnly: true
+        is_read:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedPatient:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+          readOnly: true
+        phone:
+          type: string
+          readOnly: true
+        card_no:
+          type: string
+          readOnly: true
+        polyclinic:
+          type: integer
+          nullable: true
+        family_doctor:
+          type: integer
+          nullable: true
+        birth_date:
+          type: string
+          format: date
+          nullable: true
+        age:
+          type: string
+          readOnly: true
+        gender:
+          oneOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        blood_group:
+          oneOf:
+          - $ref: '#/components/schemas/BloodGroupEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        pinfl:
+          type: string
+          nullable: true
+          maxLength: 14
+        address:
+          type: string
+          maxLength: 200
+        allergies:
+          type: string
+          maxLength: 300
+        chronic:
+          type: string
+          maxLength: 300
+        emergency_name:
+          type: string
+          maxLength: 80
+        emergency_phone:
+          type: string
+          maxLength: 30
+    PatchedPlace:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        distance_m:
+          type: integer
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/PlaceKindEnum'
+        name:
+          type: string
+          maxLength: 120
+        address:
+          type: string
+          maxLength: 200
+        phone:
+          type: string
+          maxLength: 30
+        work_hours:
+          type: string
+          maxLength: 60
+        is_24h:
+          type: boolean
+        lat:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+        lng:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+        services:
+          type: string
+          maxLength: 300
+        is_active:
+          type: boolean
+    PatchedPolyclinic:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        address:
+          type: string
+          maxLength: 200
+        phone:
+          type: string
+          maxLength: 30
+        work_hours:
+          type: string
+          maxLength: 60
+        is_active:
+          type: boolean
+    PatchedReminder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        taken_today:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        dose:
+          type: string
+          maxLength: 80
+        time:
+          type: string
+          format: time
+        active:
+          type: boolean
+        patient:
+          type: integer
+          readOnly: true
+    PatchedSanatorium:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        location:
+          type: string
+          maxLength: 160
+        profile:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price_per_night:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        phone:
+          type: string
+          maxLength: 30
+        check_in:
+          type: string
+          maxLength: 10
+        check_out:
+          type: string
+          maxLength: 10
+        rating:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
+        is_active:
+          type: boolean
+    PatchedSpecialization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        slot_minutes:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        is_active:
+          type: boolean
+    PatchedUserAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 20
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        middle_name:
+          type: string
+          maxLength: 60
+        full_name:
+          type: string
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        last_login:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          title: Oxirgi kirish
+        password:
+          type: string
+          writeOnly: true
+    PatchedVaccination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        due_date:
+          type: string
+          format: date
+        done_date:
+          type: string
+          format: date
+          nullable: true
+        patient:
+          type: integer
+          readOnly: true
+        family_member:
+          type: integer
+          nullable: true
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+          readOnly: true
+        full_name:
+          type: string
+          readOnly: true
+        phone:
+          type: string
+          readOnly: true
+        card_no:
+          type: string
+          readOnly: true
+        polyclinic:
+          type: integer
+          nullable: true
+        family_doctor:
+          type: integer
+          nullable: true
+        birth_date:
+          type: string
+          format: date
+          nullable: true
+        age:
+          type: string
+          readOnly: true
+        gender:
+          oneOf:
+          - $ref: '#/components/schemas/GenderEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        blood_group:
+          oneOf:
+          - $ref: '#/components/schemas/BloodGroupEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        pinfl:
+          type: string
+          nullable: true
+          maxLength: 14
+        address:
+          type: string
+          maxLength: 200
+        allergies:
+          type: string
+          maxLength: 300
+        chronic:
+          type: string
+          maxLength: 300
+        emergency_name:
+          type: string
+          maxLength: 80
+        emergency_phone:
+          type: string
+          maxLength: 30
+      required:
+      - age
+      - card_no
+      - full_name
+      - id
+      - phone
+      - user
+    Place:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        distance_m:
+          type: integer
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/PlaceKindEnum'
+        name:
+          type: string
+          maxLength: 120
+        address:
+          type: string
+          maxLength: 200
+        phone:
+          type: string
+          maxLength: 30
+        work_hours:
+          type: string
+          maxLength: 60
+        is_24h:
+          type: boolean
+        lat:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+        lng:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+        services:
+          type: string
+          maxLength: 300
+        is_active:
+          type: boolean
+      required:
+      - address
+      - distance_m
+      - id
+      - kind
+      - lat
+      - lng
+      - name
+    PlaceKindEnum:
+      enum:
+      - pharmacy
+      - clinic
+      type: string
+      description: |-
+        * `pharmacy` - Dorixona
+        * `clinic` - Xususiy klinika
+    Polyclinic:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        address:
+          type: string
+          maxLength: 200
+        phone:
+          type: string
+          maxLength: 30
+        work_hours:
+          type: string
+          maxLength: 60
+        is_active:
+          type: boolean
+      required:
+      - id
+      - name
+    Prescription:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: string
+          readOnly: true
+        patient:
+          type: integer
+        doctor:
+          type: integer
+          readOnly: true
+        doctor_name:
+          type: string
+          readOnly: true
+        valid_until:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrescriptionItem'
+      required:
+      - created_at
+      - doctor
+      - doctor_name
+      - id
+      - items
+      - number
+      - patient
+      - valid_until
+    PrescriptionItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        medicine:
+          type: string
+          maxLength: 120
+        dose:
+          type: string
+          maxLength: 80
+        times_per_day:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        days:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+      required:
+      - id
+      - medicine
+    Record:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        patient:
+          type: integer
+        doctor:
+          type: integer
+          readOnly: true
+        doctor_name:
+          type: string
+          readOnly: true
+        appointment:
+          type: integer
+          nullable: true
+        complaint:
+          type: string
+        objective:
+          type: string
+        diagnosis:
+          type: integer
+          nullable: true
+        diagnosis_text:
+          type: string
+          readOnly: true
+          default: ''
+        recommendations:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - diagnosis_text
+      - doctor
+      - doctor_name
+      - id
+      - patient
+    Register:
+      type: object
+      description: Faqat bemorlar o'zlari ro'yxatdan o'tadi. Rol har doim 'patient'.
+      properties:
+        phone:
+          type: string
+          maxLength: 20
+        password:
+          type: string
+          writeOnly: true
+        first_name:
+          type: string
+          maxLength: 60
+        last_name:
+          type: string
+          maxLength: 60
+      required:
+      - first_name
+      - last_name
+      - password
+      - phone
+    Reminder:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        taken_today:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        dose:
+          type: string
+          maxLength: 80
+        time:
+          type: string
+          format: time
+        active:
+          type: boolean
+        patient:
+          type: integer
+          readOnly: true
+      required:
+      - id
+      - name
+      - patient
+      - taken_today
+      - time
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        author_name:
+          type: string
+          readOnly: true
+        doctor:
+          type: integer
+          nullable: true
+        place:
+          type: integer
+          nullable: true
+        rating:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        text:
+          type: string
+          maxLength: 500
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - author_name
+      - created_at
+      - id
+      - rating
+    RoleEnum:
+      enum:
+      - admin
+      - doctor
+      - patient
+      type: string
+      description: |-
+        * `admin` - Administrator
+        * `doctor` - Shifokor
+        * `patient` - Bemor
+    Sanatorium:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 120
+        location:
+          type: string
+          maxLength: 160
+        profile:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        price_per_night:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        phone:
+          type: string
+          maxLength: 30
+        check_in:
+          type: string
+          maxLength: 10
+        check_out:
+          type: string
+          maxLength: 10
+        rating:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,1})?$
+        is_active:
+          type: boolean
+      required:
+      - id
+      - location
+      - name
+      - price_per_night
+    Share:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        certificate:
+          type: integer
+        token:
+          type: string
+          readOnly: true
+        show_conclusion:
+          type: boolean
+        show_diagnosis:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+          readOnly: true
+        hours:
+          type: integer
+          maximum: 720
+          minimum: 1
+          writeOnly: true
+          default: 24
+      required:
+      - certificate
+      - expires_at
+      - id
+      - token
+    Specialization:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        slot_minutes:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        is_active:
+          type: boolean
+      required:
+      - id
+      - name
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        doctor:
+          type: integer
+          readOnly: true
+        doctor_name:
+          type: string
+          readOnly: true
+        room:
+          type: string
+          readOnly: true
+        patient:
+          type: integer
+          readOnly: true
+        patient_name:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        number:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/TicketStatusEnum'
+          readOnly: true
+        notify_before:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        info:
+          type: string
+          readOnly: true
+      required:
+      - created_at
+      - date
+      - doctor
+      - doctor_name
+      - id
+      - info
+      - notify_before
+      - number
+      - patient
+      - patient_name
+      - room
+      - status
+    TicketStatusEnum:
+      enum:
+      - waiting
+      - called
+      - done
+      - cancelled
+      type: string
+      description: |-
+        * `waiting` - Navbatda
+        * `called` - Qabulda
+        * `done` - Tugagan
+        * `cancelled` - Bekor
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    UserAdmin:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        phone:
+          type: string
+          maxLength: 20
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        middle_name:
+          type: string
+          maxLength: 60
+        full_name:
+          type: string
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        last_login:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+          title: Oxirgi kirish
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - full_name
+      - id
+      - last_login
+      - username
+    Vaccination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        due_date:
+          type: string
+          format: date
+        done_date:
+          type: string
+          format: date
+          nullable: true
+        patient:
+          type: integer
+          readOnly: true
+        family_member:
+          type: integer
+          nullable: true
+      required:
+      - due_date
+      - id
+      - name
+      - patient
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
